@@ -17,20 +17,22 @@ def write_json(data, filename=storage_path):
 
 new_data = {results.key: [results.val]}
 
-
 with open(storage_path) as json_file:
-    old_data = json.load(json_file)
-    new_data.update(old_data)
-    json_file.seek(0)
-os.remove(os.path.join(tempfile.gettempdir(), "storage.data"))   
-write_json(new_data)    
+        old_data = json.load(json_file)
 
 
-# def write_json(data, filename='answer.json'):
-#     with open(filename,'w') as f:
-#     json.dump(data, f, indent=2, ensure_ascii=False)
+if results.val == None:
+    if results.key in old_data:
+        print("exist")
+        for key, value in old_data.items():
+            print(value)
 
-# with open('/home/***/answer.json') as json_file:
-#     old_data= json.load(json_file)
-#     newdata.update(old_data)
-# write_json(newdata)    
+    else:
+        print(None)
+else:
+    with open(storage_path) as json_file:
+        old_data = json.load(json_file)
+        new_data.update(old_data)
+        json_file.seek(0)
+    os.remove(os.path.join(tempfile.gettempdir(), "storage.data"))   
+    write_json(new_data)   
