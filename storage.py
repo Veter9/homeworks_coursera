@@ -9,13 +9,14 @@ parser.add_argument('--key', action='store', dest='key', help='key')
 parser.add_argument('--val', nargs='+', action='store', dest='val', help='value')
 results = parser.parse_args()
 storage_path = os.path.join(tempfile.gettempdir(), 'storage.data')
-
+new_data = {results.key: [results.val]}
 
 def write_json(data, filename=storage_path):
     with open(filename,'a+') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
-new_data = {results.key: [results.val]}
+write_json(new_data)
+
 
 with open(storage_path) as json_file:
         old_data = json.load(json_file)
@@ -49,8 +50,8 @@ if results.val == None:
         print(results.key)
         print(a)
         print("--------------")
-        for (k, v) in old_data.items():
-            print(str(v))    
+        # for element in old_data[results.key]:
+        #     print(element[0], "," element[1])    
 
     else:
         print(None)
