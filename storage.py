@@ -14,7 +14,7 @@ new_data = {results.key: [results.val]}
 def write_json(data, filename=storage_path):
     with open(filename,'a+') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
-
+os.remove(os.path.join(tempfile.gettempdir(), "storage.data"))
 write_json(new_data)
 
 
@@ -60,5 +60,5 @@ else:
         old_data = json.load(json_file)
         new_data.update(old_data)
         json_file.seek(0)
-    os.remove(os.path.join(tempfile.gettempdir(), "storage.data"))   
+    # os.remove(os.path.join(tempfile.gettempdir(), "storage.data"))   
     write_json(new_data)   
